@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+  db:
+    image: 'postgres:16.0-alpine3.18'
+    volumes: 
+      - rails-app-postgres-db:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PSQL_HISTFILE: /root/log/.psql_history
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/rails-app:cached
+      - rails-app-cache:/rails-app/tmp/cache
+      - rails-app-bundle:/usr/local/bundle
+      - rails-app-packs:/rails-app/app/assets/builds
+      - rails-app-storage:/rails-app/storage
+    ports:
+      - 3000:3000
+      - 35729:35729
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_HOST: db
+      RAILS_ENV: ${RAILS_ENV:-development}
+      RAILS_MAX_THREADS: 5
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  redis:
+    image: redis:7.2.1-alpine3.18
+    volumes:
+      - rails-app-redis:/data
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+volumes:
+  rails-app-postgres-db:
+  rails-app-redis:
+  rails-app-bundle:
+  rails-app-cache:
+  rails-app-packs:
+  rails-app-storage:

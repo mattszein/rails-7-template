@@ -1,0 +1,25 @@
+<article class="prose m-24">
+
+<h1>ViewComponents kitchen sink</h1>
+<p>This page will demo our ViewComponents</p>
+
+
+<h2>ButtonComponent</h2>
+<h3>Primary</h3>
+<%= render(Core::Form::ButtonComponent.new(type: :primary)) do %>
+    Submit
+<% end %>
+
+<h3>Secondary</h3>
+<%= render(Core::Form::ButtonComponent.new(type: :secondary)) do %>
+    Cancel 
+<% end %>
+
+<h3>Create</h3>
+<%= render(Core::Form::ButtonComponent.new(type: :create)) do %>
+    Create 
+<% end %>
+
+
+</article>
+</div>
