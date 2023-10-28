@@ -64,6 +64,8 @@ group :development do
   gem "standard"
   gem "standard-rails"
   gem "rubocop-rspec"
+  gem "lookbook", ">= 2.1.1"
+  gem "listen"
 end
 
 group :test do
