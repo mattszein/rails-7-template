@@ -31,8 +31,8 @@ module.exports = {
         gray: colors.gray,
       }
     },
-    darkMode: 'class',
   },
+  darkMode: ['class', '[data-mode="dark"]'],
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),

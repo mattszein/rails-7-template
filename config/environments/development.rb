@@ -73,4 +73,15 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.view_component.preview_paths << "#{root}/app/components"
+  config.view_component.default_preview_layout = "preview"
+  config.view_component.preview_controller = "PreviewController"
+  config.view_component.show_previews = true
+  config.lookbook.project_name = "Rails App Template"
+  config.lookbook.debug_menu = true
+  config.lookbook.preview_embeds.policy = "ALLOWALL"
+  config.lookbook.preview_display_options = {
+    theme: ["light", "dark"] # dynamic 'theme' display option
+  }
 end
