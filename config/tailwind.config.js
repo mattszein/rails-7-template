@@ -12,7 +12,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+      },
+      fontSize: {
+        sm: ['16px', '24px'],
+        md: ['20px', '30px'],
+        base: ['20px', '30px'],
+        lg: ['24px', '32px'],
+        xl: ['28px', '36px'],
       },
       colors: {
         brand: "#FD4F00",
@@ -31,8 +38,8 @@ module.exports = {
         gray: colors.gray,
       }
     },
-    darkMode: 'class',
   },
+  darkMode: ['class', '[data-mode="dark"]'],
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
