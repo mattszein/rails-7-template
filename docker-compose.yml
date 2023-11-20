@@ -1,5 +1,44 @@
 version: "3.7"
 services:
+
+  x-backend: &backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+      args:
+        RUBY_VERSION: '3.2.2'
+        PG_MAJOR: '16'
+    environment: &env
+      # ----
+      # Application configuration
+      # ----
+      ROOT_DIR: "/rails-app/"
+      RAILS_ENV: ${RAILS_ENV:-development}
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_HOST: db
+      RAILS_MAX_THREADS: 5
+      REDIS_URL: redis://redis:6379/1
+      MALLOC_ARENA_MAX: 2
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+      # ----
+      # Dev tools
+      # ----
+      HISTFILE: /usr/local/hist/.bash_history
+      IRB_HISTFILE: /usr/local/hist/.irb_history
+      PSQL_HISTFILE: /usr/local/hist/.psql_history
+      EDITOR: vi
+      # -----
+      # Caches
+      # -----
+      BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+      XDG_DATA_HOME: /rails-app/tmp/cache
+    tmpfs:
+      - /tmp
+      - /app/tmp/pids
+  
   db:
     image: 'postgres:16.0-alpine3.18'
     volumes: 
@@ -13,33 +52,27 @@ services:
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
+  
   rails:
-    build:
-      context: .
-      dockerfile: Dockerfile-dev
+    <<: *backend
     command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/rails-app:cached
       - rails-app-cache:/rails-app/tmp/cache
       - rails-app-bundle:/usr/local/bundle
-      - rails-app-packs:/rails-app/app/assets/builds
+      - rails-app-builds:/rails-app/app/assets/builds
+      - rails-app-assets:/app/public/assets
       - rails-app-storage:/rails-app/storage
+      - rails-app-history:/usr/local/hist
     ports:
       - 3000:3000
       - 35729:35729
-    environment:
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      DB_PORT: 5432
-      DB_HOST: db
-      RAILS_ENV: ${RAILS_ENV:-development}
-      RAILS_MAX_THREADS: 5
-      REDIS_URL: redis://redis:6379/1
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
+  
   redis:
     image: redis:7.2.1-alpine3.18
     volumes:
@@ -51,10 +84,23 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+  
+  solargraph:
+    <<: *backend
+    ports:
+      - 7658:7658
+    volumes:
+      - .:/rails-app
+      - rails-app-bundle:/usr/local/bundle
+    command: ["solargraph", "socket", "stdio"]
+    restart: always
+
 volumes:
   rails-app-postgres-db:
   rails-app-redis:
   rails-app-bundle:
   rails-app-cache:
-  rails-app-packs:
+  rails-app-builds:
+  rails-app-assets:
   rails-app-storage:
+  rails-app-history:

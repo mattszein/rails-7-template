@@ -62,11 +62,13 @@ group :development do
   gem "rspec-rails"
   gem "factory_bot"
   gem "shoulda-matchers"
+  gem "rubocop-rspec"
   gem "standard"
   gem "standard-rails"
-  gem "rubocop-rspec"
   gem "lookbook", ">= 2.1.1"
   gem "listen"
+  gem "solargraph"
+  gem "solargraph-rails"
 end
 
 group :test do
