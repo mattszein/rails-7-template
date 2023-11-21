@@ -68,6 +68,8 @@ services:
       - 3000:3000
       - 35729:35729
     depends_on:
+      mailcatcher:
+        condition: service_started
       db:
         condition: service_healthy
       redis:
@@ -85,6 +87,14 @@ services:
       timeout: 3s
       retries: 30
   
+  # port 1080
+  #
+  # mailcatcher does not start with ruby 3.2
+  mailcatcher:
+    image: sj26/mailcatcher:v0.9.0
+    ports:
+      - 1080:1080
+
   solargraph:
     <<: *backend
     ports:
