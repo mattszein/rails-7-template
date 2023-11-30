@@ -1,0 +1,14 @@
+<!-- app/views/users/_form.html.erb -->
+<%= form_with(model: user, data: {turbo: false}) do |form| %>
+<div class="mb-6">
+  <%= form.label :username %> 
+  <%= form.text_field :username %>
+</div>
+
+<div class="mb-6">
+  <%= form.label :email %> 
+  <%= form.text_field :email %>
+</div>
+
+<%= form.submit "Create account" %> 
+<% end %>

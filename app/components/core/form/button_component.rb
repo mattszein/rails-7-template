@@ -17,14 +17,18 @@ class Core::Form::ButtonComponent < ViewComponent::Form::ButtonComponent
     giant: "px-8 py-5 text-4xl"
   }.freeze
 
-  def initialize(form, value, theme = :primary, size = :md, options = {})
+  def initialize(form, value, style = {}, options = {})
+    default = {theme: :primary, size: :md, fullw: false}
+    style_merged = default.merge(style)
     @value = value
-    @theme = theme
-    @size = size
+    @theme = style_merged[:theme]
+    @fullw = style_merged[:fullw]
+    @size = style_merged[:size]
+
     super(form, value, options)
   end
 
   def html_class
-    class_names("border focus:ring-4 focus:outline-none rounded-lg mr-2 mb-2 font-medium text-center font-semibold hover:text-white dark:hover:text-white", THEME_MAPPINGS[@theme], SIZE_MAPPINGS[@size])
+    class_names("border focus:ring-4 focus:outline-none rounded-lg mr-2 mb-2 font-medium text-center font-semibold hover:text-white dark:hover:text-white", THEME_MAPPINGS[@theme], SIZE_MAPPINGS[@size], @fullw ? "w-full" : "")
   end
 end

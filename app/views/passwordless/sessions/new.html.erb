@@ -1,0 +1,12 @@
+<%= render(Core::CardComponent.new()) do %>
+<div class="container">
+ <%= image_tag("/images/logo.png", alt: "Logo", class: "w-24 h-24 mx-auto mb-4") %>
+  <h2 class="mb-6 text-lg leading-none tracking-tight text-gray-900 md:text-xl lg:text-2xl dark:text-white"> Login into your account</h2>
+<%= form_with(model: @session, scope: :passwordless, url: url_for(action: 'new'), data: { turbo: 'false' }, builder: CustomFormBuilder) do |f| %>
+  <div class="mb-12">
+    <%= f.labeled email_field, t("passwordless.sessions.new.email.label"), {for: "passwordless_#{email_field}", custom_style: {style: :default}} do %>
+      <%= f.text_field email_field, {required: true, autofocus: true, placeholder: "", custom_style: {theme: :primary}} %> <% end %> </div> <div class="mb-12"> <%= f.button t("passwordless.sessions.new.submit"), {fullw: true} %>
+  </div>
+<% end %>
+</div>
+<% end %>
