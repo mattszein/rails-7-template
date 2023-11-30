@@ -68,7 +68,7 @@ services:
       - 3000:3000
       - 35729:35729
     depends_on:
-      mailcatcher:
+      maildev:
         condition: service_started
       db:
         condition: service_healthy
@@ -86,14 +86,19 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-  
-  # port 1080
-  #
-  # mailcatcher does not start with ruby 3.2
-  mailcatcher:
-    image: sj26/mailcatcher:v0.9.0
+
+  maildev:
+    image: maildev/maildev
+    restart: always
+    environment:
+      MAILDEV_SMTP_PORT: 1025
+      MAILDEV_WEB_PORT: 8025
+      MAILDEV_MAIL_DIRECTORY: /home/node/data
+    volumes:
+      - rails-app-mc-data:/home/node
     ports:
-      - 1080:1080
+      - "1025:1025"
+      - "8025:8025"
 
   solargraph:
     <<: *backend
@@ -114,3 +119,4 @@ volumes:
   rails-app-assets:
   rails-app-storage:
   rails-app-history:
+  rails-app-mc-data:

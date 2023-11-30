@@ -43,9 +43,14 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "mailcatcher",
+    address: "maildev",
     port: 1025
   }
+
+  config.action_mailer.default_url_options = {host: "localhost:3000"} # for absolute urls in email
+
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -83,10 +88,13 @@ Rails.application.configure do
   config.view_component.default_preview_layout = "preview"
   config.view_component.preview_controller = "PreviewController"
   config.view_component.show_previews = true
+  config.view_component.generate.stimulus_controller = true
   config.lookbook.project_name = "Rails App Template"
   config.lookbook.debug_menu = true
   config.lookbook.preview_embeds.policy = "ALLOWALL"
   config.lookbook.preview_display_options = {
     theme: ["light", "dark"] # dynamic 'theme' display option
   }
+
+  config.importmap.cache_sweepers << Rails.root.join("app/components")
 end
