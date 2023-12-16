@@ -1,7 +1,6 @@
 <!-- app/views/static/index.html.erb-->
-<div class="max-w-2xl p-8 rounded-xl mx-auto text-center my-16 bg-gray-50">
-  <h1 class="font-black text-3xl">Super-mega Passwordless App</h1>
-
+<%= render(Core::CardComponent.new()) do %>
+  <h1 class="font-black text-3xl">Super Rails App</h1>
   <% if current_user.present? %>
   <p class="py-3">
     You are signed in as
@@ -9,12 +8,13 @@
       ><%= current_user.username %>(<%= current_user.email %>)</span
     >
   </p>
-  <%= link_to "Sign out", users_sign_out_path, class: "bg-sky-500 text-black px-3 py-2 font-semibold rounded", method: :delete %> <% else %>
-  <p class="text-lg text-gray-600 my-4">Sign up for members-only access</p>
+  <%= render(Core::LinkComponent.new("Sign Out", users_sign_out_path, custom_style: {theme: :primary, size: :sm})) %>
+<% else %>
+  <p class="text-lg text-gray-600">Sign up for members-only access</p>
   <div class="flex items-center space-x-3 justify-center">
-    <%= link_to "Sign in", users_sign_in_path, class: "bg-sky-500 text-white
-    px-3 py-2 font-semibold rounded" %>
-    <%= link_to "Create account", new_user_path, class: "bg-emerald-500 text-white px-3 py-2 font-semibold rounded" %>
+    <%= render(Core::LinkComponent.new("Sign In", users_sign_in_path, custom_style: {theme: :primary, size: :sm})) %>
+    <%= render(Core::LinkComponent.new("Register", new_user_path, custom_style: {theme: :secondary, size: :sm})) %>
   </div>
   <% end %>
-</div>
+<% end %>
+

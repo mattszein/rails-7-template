@@ -43,6 +43,7 @@ RSpec.configure do |config|
       ActionMailer::Base.deliveries.clear
     end
   end
+  config.include FactoryBot::Syntax::Methods
 end
 
 Shoulda::Matchers.configure do |config|

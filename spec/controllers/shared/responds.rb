@@ -7,8 +7,14 @@ RSpec.shared_examples "respond to missing" do
 end
 
 RSpec.shared_examples "respond to success" do
-  it "should return room with success" do
+  it "should responds with success" do
     expect(subject).to have_http_status(200)
+  end
+end
+
+RSpec.shared_examples "respond with redirect" do
+  it "should responds with redirect" do
+    expect(subject).to have_http_status(302)
   end
 end
 

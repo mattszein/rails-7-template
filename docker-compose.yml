@@ -35,6 +35,9 @@ services:
       # -----
       BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
       XDG_DATA_HOME: /rails-app/tmp/cache
+      # ----
+      # Test envs
+      CHROME_URL: ${CHROME_URL:-http://chrome:3333}
     tmpfs:
       - /tmp
       - /app/tmp/pids
@@ -110,6 +113,19 @@ services:
     command: ["solargraph", "socket", "stdio"]
     restart: always
 
+  chrome:
+    # Currently, Apple M1 is only supported in unnumbered "latest" versions.
+    # See https://github.com/browserless/chrome/issues/1393
+    image: browserless/chrome:latest
+    ports:
+      - '3333:3333'
+    volumes:
+      - .:/rails-app
+    environment:
+      PORT: 3333
+      # Set connection timeout for debugging
+      # https://docs.browserless.io/docs/docker.html#connection-timeout
+      CONNECTION_TIMEOUT: 600000
 volumes:
   rails-app-postgres-db:
   rails-app-redis:
