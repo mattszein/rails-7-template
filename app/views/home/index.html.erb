@@ -1,25 +1,20 @@
-<article class="prose m-24">
-
-<h1>ViewComponents kitchen sink</h1>
-<p>This page will demo our ViewComponents</p>
-
-
-<h2>ButtonComponent</h2>
-<h3>Primary</h3>
-<%= render(Core::Form::ButtonComponent.new(type: :primary)) do %>
-    Submit
+<!-- app/views/static/index.html.erb-->
+<%= render(Core::CardComponent.new()) do %>
+  <h1 class="font-black text-3xl">Super Rails App</h1>
+  <% if current_user.present? %>
+  <p class="py-3">
+    You are signed in as
+    <span class="font-semibold text-sky-800"
+      ><%= current_user.username %>(<%= current_user.email %>)</span
+    >
+  </p>
+  <%= render(Core::LinkComponent.new("Sign Out", users_sign_out_path, custom_style: {theme: :primary, size: :sm})) %>
+<% else %>
+  <p class="text-lg text-gray-600">Sign up for members-only access</p>
+  <div class="flex items-center space-x-3 justify-center">
+    <%= render(Core::LinkComponent.new("Sign In", users_sign_in_path, custom_style: {theme: :primary, size: :sm})) %>
+    <%= render(Core::LinkComponent.new("Register", new_user_path, custom_style: {theme: :secondary, size: :sm})) %>
+  </div>
+  <% end %>
 <% end %>
 
-<h3>Secondary</h3>
-<%= render(Core::Form::ButtonComponent.new(type: :secondary)) do %>
-    Cancel 
-<% end %>
-
-<h3>Create</h3>
-<%= render(Core::Form::ButtonComponent.new(type: :create)) do %>
-    Create 
-<% end %>
-
-
-</article>
-</div>

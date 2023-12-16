@@ -1,0 +1,5 @@
+<!-- app/views/users/new.html.erb -->
+<%= render(Core::CardComponent.new()) do %>
+  <h1 class="font-black text-2xl">Create an account</h1>
+  <%= render "form", user: @user %>
+<% end %>

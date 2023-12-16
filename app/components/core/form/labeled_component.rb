@@ -11,9 +11,13 @@ class Core::Form::LabeledComponent < ViewComponent::Form::LabelComponent
     filled: "top-5 left-3.5 peer-focus:-translate-y-4"
   }.freeze
 
-  def initialize(form, object_name, method_name, theme = :md, style = :default, content_or_options = nil, options = nil)
-    @theme = theme
-    @style = style
+  DEFAULT = {theme: :primary, style: :default}.freeze
+
+  def initialize(form, object_name, method_name, content_or_options = nil, options = nil)
+    custom_style = options&.delete(:custom_style) || {}
+    options_merged = DEFAULT.merge(custom_style)
+    @theme = options_merged[:theme]
+    @style = options_merged[:style]
     super(form, object_name, method_name, content_or_options, options)
   end
 

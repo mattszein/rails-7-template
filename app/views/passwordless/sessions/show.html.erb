@@ -1,0 +1,5 @@
+<%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }) do |f| %>
+  <%= render(Core::CardComponent.new()) do %>
+    <%= f.code :token, 6 %>
+  <% end %>
+<% end %>

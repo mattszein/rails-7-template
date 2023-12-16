@@ -35,6 +35,9 @@ services:
       # -----
       BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
       XDG_DATA_HOME: /rails-app/tmp/cache
+      # ----
+      # Test envs
+      CHROME_URL: ${CHROME_URL:-http://chrome:3333}
     tmpfs:
       - /tmp
       - /app/tmp/pids
@@ -68,7 +71,7 @@ services:
       - 3000:3000
       - 35729:35729
     depends_on:
-      mailcatcher:
+      maildev:
         condition: service_started
       db:
         condition: service_healthy
@@ -86,14 +89,19 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-  
-  # port 1080
-  #
-  # mailcatcher does not start with ruby 3.2
-  mailcatcher:
-    image: sj26/mailcatcher:v0.9.0
+
+  maildev:
+    image: maildev/maildev
+    restart: always
+    environment:
+      MAILDEV_SMTP_PORT: 1025
+      MAILDEV_WEB_PORT: 8025
+      MAILDEV_MAIL_DIRECTORY: /home/node/data
+    volumes:
+      - rails-app-mc-data:/home/node
     ports:
-      - 1080:1080
+      - "1025:1025"
+      - "8025:8025"
 
   solargraph:
     <<: *backend
@@ -105,6 +113,19 @@ services:
     command: ["solargraph", "socket", "stdio"]
     restart: always
 
+  chrome:
+    # Currently, Apple M1 is only supported in unnumbered "latest" versions.
+    # See https://github.com/browserless/chrome/issues/1393
+    image: browserless/chrome:latest
+    ports:
+      - '3333:3333'
+    volumes:
+      - .:/rails-app
+    environment:
+      PORT: 3333
+      # Set connection timeout for debugging
+      # https://docs.browserless.io/docs/docker.html#connection-timeout
+      CONNECTION_TIMEOUT: 600000
 volumes:
   rails-app-postgres-db:
   rails-app-redis:
@@ -114,3 +135,4 @@ volumes:
   rails-app-assets:
   rails-app-storage:
   rails-app-history:
+  rails-app-mc-data:

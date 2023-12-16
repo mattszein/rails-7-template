@@ -23,7 +23,7 @@ module.exports = {
       },
       colors: {
         brand: "#FD4F00",
-        primary: colors.indigo,
+        primary: colors.purple,
         secondary: colors.pink,
         success: colors.green,
         danger: colors.red,
