@@ -408,6 +408,7 @@ DEPENDENCIES
   jbuilder
   listen
   lookbook (>= 2.1.1)
+  nokogiri
   passwordless
   pg (~> 1.1)
   puma (>= 5.0)

@@ -36,6 +36,7 @@ gem "passwordless"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
+  gem "nokogiri"
 end
 
 group :development do
@@ -43,8 +44,6 @@ group :development do
   gem "web-console"
   gem "hotwire-livereload"
   gem "rspec-rails"
-  gem "factory_bot_rails"
-  gem "shoulda-matchers"
   gem "rubocop-rspec"
   gem "standard"
   gem "standard-rails"
@@ -59,4 +58,6 @@ group :test do
   gem "capybara"
   gem "cuprite"
   gem "test-prof"
+  gem "factory_bot_rails"
+  gem "shoulda-matchers"
 end

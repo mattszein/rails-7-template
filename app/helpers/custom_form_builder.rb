@@ -11,6 +11,10 @@ class CustomFormBuilder < ViewComponent::Form::Builder
     render_component("form::TextField", @object_name, method, objectify_options(options))
   end
 
+  def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
+    render_component("form::CheckBox", @object_name, method, checked_value, unchecked_value, objectify_options(options))
+  end
+
   def toggle(method, options = {}, checked_value = "1", unchecked_value = "0", theme = :primary, size = :sm)
     render_component("form::Toggle", @object_name, method, checked_value, unchecked_value, theme, size,
       objectify_options(options))

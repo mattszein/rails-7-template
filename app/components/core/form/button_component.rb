@@ -4,9 +4,9 @@ class Core::Form::ButtonComponent < ViewComponent::Form::ButtonComponent
   attr_accessor :theme, :size
 
   THEME_MAPPINGS = {
-    primary: "border-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:border-primary-500 dark:hover:bg-primary-500 dark:focus:ring-primary-800 text-primary-700 dark:text-primary-500",
+    primary: "border-primary-700 hover:bg-primary-800 focus:ring-primary-300 focus:underline dark:border-primary-500 dark:hover:bg-primary-500 dark:focus:ring-primary-800 text-primary-700 dark:text-primary-500",
     secondary: "border-secondary-600 hover:bg-secondary-600 focus:ring-secondary-300 dark:border-secondary-500 dark:hover:bg-secondary-500 dark:focus:ring-secondary-800 text-secondary-700 dark:text-secondary-500",
-    create: "border-create-600 hover:border-create-500 hover:bg-create-500 focus:ring-create-300 dark:border-create-500 dark:hoer:bg-create-500 dark:focus:r-create-800 text-create-600 dark:text-create-500"
+    create: "border-create-600 hover:border-create-500 hover:bg-create-500 focus:ring-create-300 dark:border-create-500 dark:hoer:bg-create-500 dark:focus:ring-create-800 text-create-600 dark:text-create-500"
   }.freeze
 
   SIZE_MAPPINGS = {
@@ -29,6 +29,6 @@ class Core::Form::ButtonComponent < ViewComponent::Form::ButtonComponent
   end
 
   def html_class
-    class_names("border focus:ring-4 focus:outline-none rounded-lg mr-2 mb-2 font-medium text-center font-semibold hover:text-white dark:hover:text-white", THEME_MAPPINGS[@theme], SIZE_MAPPINGS[@size], @fullw ? "w-full" : "")
+    class_names("border focus:ring-0 focus:outline-none focus:shadow-sm rounded-lg font-medium text-center font-semibold hover:text-white dark:hover:text-white transition-colors duration-300", THEME_MAPPINGS[@theme], SIZE_MAPPINGS[@size], @fullw ? "w-full" : "")
   end
 end
