@@ -11,14 +11,17 @@
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
 
-  <body>
-  <% flash.each do |type, msg| %>
-    <%= render(Core::AlertComponent.new(type: :warning, title: "Error", message: msg)) %>
-  <% end %>
-
-    <main class="container mx-auto mt-28 flex justify-center">
+  <body class="antialiased bg-gray-50 dark:bg-gray-900" data-controller="closer">
+    <%= render partial: "partials/navbar" %>
+    <main class="pt-20 h-full mx-auto flex justify-center">
       <%= yield %>
     </main>
 
+    <% if current_user %>
+      <%= render(Core::SidebarComponent.new(open: @sidebar_open)) %>
+    <% end %>
+    <% flash.each do |type, msg| %>
+      <%= render(Core::AlertComponent.new(type: :warning, title: "Error", message: msg)) %>
+    <% end %>
   </body>
 </html>

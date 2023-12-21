@@ -1,12 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
+import {enter, leave, toggle} from 'el-transition'
+import Cookies from 'js-cookie'
 
 export default class extends Controller {
-  static targets = [ "closeable" ]
+  static targets = [ "alert", "sidebar" ]
 
   close() {
-    this.element.classList.add(...[ "transition-opacity", "ease-in-out", "delay-50", "duration-200", "opacity-0" ])
-    setTimeout(() => {
-      this.element.classList.add('hidden');
-    }, 200);
+    leave(this.element);
+ }
+
+  toggleIt() {
+    toggle(this.element);
   }
+
+  toggleSidebar() {
+    toggle(this.sidebarTarget);
+    let sidebar = Cookies.get(this.sidebarCookieName)
+    Cookies.set(this.sidebarCookieName, (sidebar === '0' || sidebar === undefined) ? '1' : '0')
+  }
+
+  get sidebarCookieName() {
+    return `sidebar`
+  }
+
+  getCookieValue(name) {
+    return Cookies.get(name)
+  }
+
 }

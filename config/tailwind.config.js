@@ -9,6 +9,7 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}',
     './app/components/**/*.{erb,rb,html}'
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -39,7 +40,6 @@ module.exports = {
       }
     },
   },
-  darkMode: ['class', '[data-mode="dark"]'],
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),

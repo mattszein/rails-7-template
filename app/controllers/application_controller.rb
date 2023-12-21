@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   include ErrorResponseActions
 
+  before_action :set_sidebar_open
+
   def index
   end
 
@@ -19,5 +21,11 @@ class ApplicationController < ActionController::Base
     return if current_user
     save_passwordless_redirect_location!(User) # <-- optional, see below
     redirect_to root_path, flash: {error: "You are not worthy!"}
+  end
+
+  def set_sidebar_open
+    puts "set_sidebar_open"
+    value = cookies["sidebar"]
+    @sidebar_open = !value.nil? && value == "1"
   end
 end
