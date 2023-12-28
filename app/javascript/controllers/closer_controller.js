@@ -3,10 +3,13 @@ import {enter, leave, toggle} from 'el-transition'
 import Cookies from 'js-cookie'
 
 export default class extends Controller {
-  static targets = [ "alert", "sidebar" ]
+  static targets = [ "alert", "sidebar", "modal" ]
 
   close() {
-    leave(this.element);
+    let element = this.element
+    leave(element).then(() => {
+        element.remove();
+    });
  }
 
   toggleIt() {

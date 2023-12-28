@@ -8,7 +8,7 @@
   <% end %>
   <div class="flex items-center mt-6">
     <%= form.check_box :terms_of_service, {required: true}, "true", "false" %>
-    <%= form.label :terms_of_service, "I agree with the <span>#{link_to 'Terms of Service', policies_path, class: "font-bold hover:underline"}</span>.".html_safe, class: "ms-2 text-sm cursor-pointer" %>
+    <%= form.label :terms_of_service, "I agree with the <span>#{link_to 'Terms of Service', policies_path, class: "font-bold hover:underline", data: { turbo: "true", turbo_frame: "modal" }}</span>.".html_safe, class: "ms-2 text-sm cursor-pointer" %>
   </div>
   <div class="mt-6">
     <%= form.button "Create", {fullw: true} %> 
