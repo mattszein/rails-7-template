@@ -33,6 +33,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def policies
+  end
+
   private
 
   def user_params
