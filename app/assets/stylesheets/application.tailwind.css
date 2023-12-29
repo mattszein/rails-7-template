@@ -27,3 +27,7 @@ input:-webkit-autofill:active{
 :is(.dark input:-webkit-autofill) {
   -webkit-text-fill-color: #ffffff;
 }
+
+:is(.dark .is-filled input:-webkit-autofill) {
+    -webkit-box-shadow: inset #1e293b 0em 4em;
+}

@@ -22,7 +22,7 @@ class Core::Form::LabeledComponent < ViewComponent::Form::LabelComponent
   end
 
   def html_class
-    class_names("absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 group-[.is-filled]:-translate-y-4", THEMES[theme], STYLE[style])
+    class_names("absolute text-base text-gray-500 dark:text-gray-200 duration-300 transform -translate-y-6 scale-75 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 group-[.is-filled]:-translate-y-4 bg-transparent", THEMES[theme], STYLE[style])
   end
 
   def render_label
