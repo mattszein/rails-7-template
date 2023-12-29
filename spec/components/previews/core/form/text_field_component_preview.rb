@@ -10,19 +10,45 @@ class Core::Form::TextFieldComponentPreview < ViewComponent::Preview
   # ```
   #
   # See [https://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html#method-i-text_area](https://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html#method-i-text_area).
-  def basic(method: :comment)
-    render Core::Form::TextFieldComponent.new(form_builder, "holi", method)
+
+  # @label Playground
+  # @param method_name
+  # @param object_name
+  # @param theme select [primary, secondary]
+  # @param size select [sm, md]
+  def playground(method_name: "name", object_name: "input", theme: :primary, size: :md)
+    render Core::Form::TextFieldComponent.new(form_builder, object_name, method_name, {custom_style: {theme: theme, size: size}})
+  end
+
+  # @!group Themes
+  def primary
+    render Core::Form::TextFieldComponent.new(form_builder, "input", "name", {custom_style: {theme: :primary}})
+  end
+
+  def secondary
+    render Core::Form::TextFieldComponent.new(form_builder, "input", "name", {custom_style: {theme: :secondary}})
+  end
+
+  # @!endgroup
+
+  # @!group Sizes
+
+  def small
+    render Core::Form::TextFieldComponent.new(form_builder, "input", "name", {custom_style: {size: :sm}})
+  end
+
+  def medium
+    render Core::Form::TextFieldComponent.new(form_builder, "input", "name", {custom_style: {size: :md}})
+  end
+  # @!endgroup
+
+  def with_floating_label
+    render(Core::Form::LabeledComponent.new(form_builder, "input", "name", nil, nil)) do |component|
+      component.render(Core::Form::TextFieldComponent.new(form_builder, "input", "name", {placeholder: ""}))
+    end
   end
 
   protected
 
-  def form_builder(object_name = nil, object = nil, options = {})
-    CustomFormBuilder.new(object_name, object, template, options)
-  end
-
-  def template
-    lookup_context = ActionView::LookupContext.new(ActionController::Base.view_paths)
-
-    ActionView::Base.new(lookup_context, {}, ActionController::Base.new)
-  end
+  include Core::Form::LookbookFormHelper
 end

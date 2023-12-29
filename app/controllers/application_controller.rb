@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_sidebar_open
-    puts "set_sidebar_open"
     value = cookies["sidebar"]
     @sidebar_open = !value.nil? && value == "1"
   end
