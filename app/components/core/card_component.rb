@@ -1,13 +1,25 @@
 class Core::CardComponent < ViewComponent::Base
-  attr_accessor :padding
+  attr_accessor :padding, :html_class
 
-  def initialize(padding = "p-12")
-    @padding = padding
+  PADDING = {
+    sm: "p-4",
+    md: "p-8",
+    lg: "p-12",
+    xl: "p-16"
+  }
+
+  DEFAULT = {padding: :lg, class: ""}.freeze
+
+  def initialize(options = {})
+    options_merged = DEFAULT.merge(options)
+    @padding = options_merged[:padding]
+    @html_class = options_merged[:class]
   end
 
   def html_classes
     [
-      padding
+      PADDING[padding],
+      html_class
     ].join(" ")
   end
 end
