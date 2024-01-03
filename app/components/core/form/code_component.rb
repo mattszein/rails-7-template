@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Core::CodeComponent < ViewComponent::Base
+class Core::Form::CodeComponent < ViewComponent::Base
   attr_reader :length, :input_name
 
   def initialize(form, scope = nil, input_name = "token", length = 6)

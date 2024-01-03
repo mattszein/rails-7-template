@@ -24,6 +24,6 @@ class CustomFormBuilder < ViewComponent::Form::Builder
   end
 
   def code(method, length = 6, options = {})
-    render_component(:code, @object_name, method, length)
+    render_component("form::Code", @object_name, method, length)
   end
 end
