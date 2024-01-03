@@ -24,7 +24,7 @@ class Core::LinkComponent < ViewComponent::Base
     when :as_button
       Core::Form::ButtonComponent.new(nil, nil, {theme: theme, size: size}).html_class
     when :default
-      "inline-flex items-center justify-center border border-transparent rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 dark:text-gray-100 hover:font-bold hover:underline"
+      "inline-flex items-center justify-center border border-transparent rounded-md font-medium focus:outline-none dark:text-gray-100 hover:font-bold hover:underline"
     end
   end
 
