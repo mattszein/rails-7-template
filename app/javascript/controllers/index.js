@@ -12,8 +12,10 @@ eagerLoadControllersFrom("components", application)
 // lazyLoadControllersFrom("controllers", application)
 
 // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+if (sessionStorage.getItem('lookbook') != 'true') {
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) && localStorage.lookbook != 'true') {
   document.documentElement.classList.add('dark')
 } else {
   document.documentElement.classList.remove('dark')
+}
 }

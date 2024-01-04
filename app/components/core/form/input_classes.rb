@@ -6,7 +6,7 @@ module Core::Form::InputClasses
   }.freeze
 
   SIZES = {
-    sm: "px-2 pb-1 pt-3 text-sm",
+    sm: "pb-1 pt-3 text-sm",
     md: "pb-2 pt-3 group-[.is-floating]:pb-2 group-[.is-floating]:pt-7 text-base"
   }.freeze
 
@@ -21,6 +21,6 @@ module Core::Form::InputClasses
   end
 
   def html_class
-    class_names("block rounded-t-lg w-full text-gray-900 dark:bg-gray-800 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:text-gray-200 focus:outline-none focus: focus:ring-0 peer bg-transparent px-0 group-[.is-filled]:bg-gray-50 group-[.is-filled]:px-3.5", THEMES[theme], SIZES[size])
+    class_names("block rounded-t-lg w-full text-gray-900 border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:text-gray-200 focus:outline-none focus: focus:ring-0 peer bg-transparent px-0 group-[.is-filled]:bg-gray-50 dark:group-[.is-filled]:bg-gray-800 group-[.is-filled]:px-3.5", THEMES[theme], SIZES[size])
   end
 end

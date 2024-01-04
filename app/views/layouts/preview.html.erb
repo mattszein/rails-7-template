@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html data-mode="<%= lookbook_display(:theme) %>">
+<html class="<%= lookbook_display(:theme) %>">
 <head>
   <title>Component Preview</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <script type="text/javascript">
+      sessionStorage.setItem('lookbook', 'true');
+    </script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 </head>
