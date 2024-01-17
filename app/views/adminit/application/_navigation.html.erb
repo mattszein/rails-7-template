@@ -1,0 +1,18 @@
+<div class="flex flex-col h-full text-sm" data-controller="dropdown">
+  <div class="flex md:block justify-between items-center">
+    <div class="flex md:block items-center">
+      <h1 class="mr-2 md:p-2 text-xl font-semibold">Adminit</h1>
+      <% if main_app.respond_to?(:root_url) %>
+        <%= link_to main_app.root_url, class: "block p-2 rounded hover:bg-gray-200", data: { turbo: false } do %>
+          ← Back <span class="hidden md:inline">to App</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="md:flex flex-col flex-grow justify-between">
+      <% if allowed_to? :index?, with: Adminit::RolePolicy %> 
+        <%= link_to "Roles", adminit_roles_path, class: "block p-2 rounded hover:bg-gray-100" %> 
+      <% end %>
+  </div>
+</div>

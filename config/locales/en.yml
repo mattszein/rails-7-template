@@ -1,4 +1,7 @@
 en:
+  adminit:
+    authorization:
+      unauthorized: "You are not worthy!"
   passwordless:
     mailer:
       sign_in:
