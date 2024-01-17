@@ -15,13 +15,11 @@ class Core::LinkComponentPreview < ViewComponent::Preview
   end
 
   # @label As button
-  # @description This style is used to display a link as a button.
   def as_button
     render(Core::LinkComponent.new(name: "Link", url: "#", options: {custom_style: {style: :as_button}}))
   end
 
   # @label No style
-  # @description This style is used to display a link without any style.
   def no_style
     render(Core::LinkComponent.new(name: "Link", url: "#", options: {custom_style: {style: :no_style}}))
   end

@@ -2,6 +2,7 @@ class Core::CardComponent < ViewComponent::Base
   attr_accessor :padding, :html_class
 
   PADDING = {
+    none: "p-0",
     sm: "p-4",
     md: "p-8",
     lg: "p-12",
