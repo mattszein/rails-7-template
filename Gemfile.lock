@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action_policy (0.6.7)
+      ruby-next-core (>= 0.14.0)
     actioncable (7.1.1)
       actionpack (= 7.1.1)
       activesupport (= 7.1.1)
@@ -169,6 +171,9 @@ GEM
       view_component (>= 2.0)
       yard (~> 0.9.25)
       zeitwerk (~> 2.5)
+    madmin (1.2.8)
+      pagy (>= 3.5)
+      rails (>= 6.0.3)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -193,6 +198,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
+    pagy (6.2.0)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
@@ -310,6 +316,7 @@ GEM
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
+    ruby-next-core (1.0.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     shoulda-matchers (5.3.0)
@@ -398,6 +405,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action_policy
   bootsnap
   capybara
   cuprite
@@ -408,6 +416,7 @@ DEPENDENCIES
   jbuilder
   listen
   lookbook (>= 2.1.1)
+  madmin
   nokogiri
   passwordless
   pg (~> 1.1)
