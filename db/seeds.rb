@@ -1,14 +1,13 @@
-role_superadmin_name = "superadmin"
-role_admin_name = "admin"
-role_support_name = "support"
+role_superadmin = Role.create(name: "superadmin")
+role_admin = Role.create(name: "admin")
+role_support = Role.create(name: "support")
 
-Role.insert_all([{name: role_superadmin_name}, {name: role_admin_name}, {name: role_support_name}])
+User.create(username: "sa", email: "sa@sa.com", role: role_superadmin)
 
-u = User.create(username: "sa", email: "sa@sa.com")
-u.roles = [Role.find_by(name: role_superadmin_name)]
+User.create(username: "admin", email: "admin@admin.com", role: role_admin)
 
-u = User.create(username: "admin", email: "admin@admin.com")
-u.roles = [Role.find_by(name: role_admin_name)]
+User.create(username: "matt", email: "matt@matt.com", role: role_support)
 
-u = User.create(username: "matt", email: "matt@matt.com")
-u.roles = [Role.find_by(name: role_support_name)]
+Permission.create(resource: "ApplicationPolicy", role_ids: [1, 2, 3])
+Permission.create(resource: "RolePolicy", role_ids: [1, 2])
+Permission.create(resource: "DashboardPolicy", role_ids: [1, 2, 3])
