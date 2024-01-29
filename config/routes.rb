@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   passwordless_for :users
   get "dashboard" => "dashboard#index", :as => :dashboard
 
-  # Defines the root path route ("/")
-  # root "posts#index"
   if Rails.env.development?
     mount Lookbook::Engine, at: "/lookbook"
   end
