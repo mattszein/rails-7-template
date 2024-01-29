@@ -1,7 +1,6 @@
 module Adminit
   class ApplicationController < ActionController::Base
     default_form_builder CustomFormBuilder
-    include Pagy::Backend
     include AuthenticationConcern
     helper_method :current_user
 
@@ -17,7 +16,7 @@ module Adminit
     before_action :authorize_adminit_access
 
     def authorize_adminit_access
-      redirect_to "/", flash: {alert: "You are not worthy!"} unless current_user && Role.access_adminit?(current_user.roles)
+      redirect_to "/", flash: {alert: "You are not worthy!"} unless current_user&.adminit_access?
     end
   end
 end
