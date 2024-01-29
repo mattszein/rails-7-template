@@ -10,9 +10,12 @@
     </div>
   </div>
 
-  <div class="md:flex flex-col flex-grow justify-between">
-      <% if allowed_to? :index?, with: Adminit::RolePolicy %> 
+  <div class="md:flex flex-col flex-grow">
+      <% if allowed_to? :manage?, with: Adminit::RolePolicy %> 
         <%= link_to "Roles", adminit_roles_path, class: "block p-2 rounded hover:bg-gray-100" %> 
+      <% end %>
+      <% if allowed_to? :manage?, with: Adminit::PermissionPolicy %> 
+        <%= link_to "Permissions", adminit_permissions_path, class: "block p-2 rounded hover:bg-gray-100" %> 
       <% end %>
   </div>
 </div>

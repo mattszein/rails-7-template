@@ -5,5 +5,8 @@ namespace :adminit do
     get "user_select", on: :member
     post "user", to: "roles#add_user", on: :member
   end
+  resources :permissions, only: [:index] do
+    put "/", to: "permissions#update", on: :member
+  end
   root to: "dashboard#index"
 end
