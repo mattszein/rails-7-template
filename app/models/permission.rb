@@ -1,6 +1,6 @@
 class Permission < ApplicationRecord
   validates :resource, presence: true, uniqueness: true
-  validates :role_ids, array: {presence: true, exclusion: {in: ["", nil]}}
+  validates :role_ids, presence: true, array: {presence: true, exclusion: {in: ["", nil]}}
 
   default_scope { order(resource: :asc) }
   def self.default
