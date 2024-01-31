@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   root "home#index"
-  get "/policies" => "users#policies", :as => :policies
   get "/" => "home#index"
+  get "/policies" => "users#policies", :as => :policies
 
   resources :users, only: [:new, :create]
   passwordless_for :users
