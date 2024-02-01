@@ -8,5 +8,6 @@ namespace :adminit do
   resources :permissions, only: [:index] do
     put "/", to: "permissions#update", on: :member
   end
+  resources :dashboard, only: [:index]
   root to: "dashboard#index"
 end

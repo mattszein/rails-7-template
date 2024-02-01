@@ -4,6 +4,6 @@ class Permission < ApplicationRecord
 
   default_scope { order(resource: :asc) }
   def self.default
-    find_by(resource: "ApplicationPolicy")
+    find_by(resource: Adminit::ApplicationPolicy.identifier)
   end
 end

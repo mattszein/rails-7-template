@@ -8,6 +8,7 @@ User.create(username: "admin", email: "admin@admin.com", role: role_admin)
 
 User.create(username: "matt", email: "matt@matt.com", role: role_support)
 
-Permission.create(resource: "ApplicationPolicy", role_ids: [1, 2, 3])
-Permission.create(resource: "RolePolicy", role_ids: [1, 2])
-Permission.create(resource: "DashboardPolicy", role_ids: [1, 2, 3])
+Permission.create(resource: Adminit::ApplicationPolicy.identifier, role_ids: [1, 2, 3])
+Permission.create(resource: Adminit::RolePolicy.identifier, role_ids: [1, 2])
+Permission.create(resource: Adminit::PermissionPolicy.identifier, role_ids: [1])
+Permission.create(resource: Adminit::DashboardPolicy.identifier, role_ids: [1, 2, 3])

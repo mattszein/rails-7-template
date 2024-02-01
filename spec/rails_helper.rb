@@ -13,6 +13,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 require "rspec/rails"
+require "action_policy/rspec"
 
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 

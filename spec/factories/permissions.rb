@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :permission do
-    resource { "ApplicationPolicy" }
+    resource { Adminit::ApplicationPolicy.identifier }
     role_ids { [create(:role).id] }
   end
 end

@@ -1,4 +1,5 @@
 module Adminit
-  class UserResourcePolicy < ApplicationPolicy
+  class UserPolicy < ApplicationPolicy
+    self.identifier = :"Adminit::UserPolicy"
   end
 end
