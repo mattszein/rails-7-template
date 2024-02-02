@@ -1,8 +1,10 @@
 module Adminit
   class ApplicationController < ActionController::Base
     default_form_builder CustomFormBuilder
-    include AuthenticationConcern
+    include Authentication
     helper_method :current_user
+    before_action :require_user!
+    before_action :authorize_adminit_access
 
     rescue_from ActionPolicy::Unauthorized do |ex|
       msg = I18n.t("adminit.authorization.unauthorized")
@@ -13,7 +15,6 @@ module Adminit
         format.html { redirect_to "/", flash: {alert: msg} }
       end
     end
-    before_action :authorize_adminit_access
 
     def authorize_adminit_access
       redirect_to "/", flash: {alert: "You are not worthy!"} unless current_user&.adminit_access?

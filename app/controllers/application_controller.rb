@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   default_form_builder CustomFormBuilder
-  include AuthenticationConcern
+  include Authentication
   include ErrorResponseActions
   helper_method :current_user
   before_action :set_sidebar_open

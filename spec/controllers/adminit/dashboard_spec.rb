@@ -10,7 +10,7 @@ describe Adminit::DashboardController, type: :controller do
     subject { get :index, params: {} }
 
     context "when not logged" do
-      it_behaves_like "respond with redirect"
+      it_behaves_like "unauthenticated"
     end
 
     context "when logged" do
@@ -19,7 +19,7 @@ describe Adminit::DashboardController, type: :controller do
           login_user(create(:user)) # login user
         end
 
-        it_behaves_like "respond with redirect"
+        it_behaves_like "unauthorized"
       end
 
       context "with a role" do

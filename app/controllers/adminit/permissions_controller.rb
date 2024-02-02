@@ -1,13 +1,16 @@
 class Adminit::PermissionsController < Adminit::ApplicationController
   before_action :set_permission, only: %i[update]
+
   # GET /adminit/permissions
   def index
+    authorize!
     @roles = Role.all.collect { |p| [p.name, p.id] }
     @permissions = Permission.all
   end
 
   # /PUT /adminit/permissions/:id
   def update
+    authorize!
     @permission.role_ids = permission_params[:role_ids]
     if @permission.save
       flash[:notice] = "Role was successfully updated."
