@@ -5,5 +5,8 @@ FactoryBot.define do
     trait :role do
       association :role, factory: :role
     end
+    trait :superadmin do
+      association :role, factory: :role, id: 1
+    end
   end
 end

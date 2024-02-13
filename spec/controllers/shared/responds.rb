@@ -48,3 +48,26 @@ RSpec.shared_examples "unauthorized" do
     expect(subject).to redirect_to root_url
   end
 end
+
+RSpec.shared_context "user and permissions adminit" do
+  let(:user) { create(:user, :role) }
+  let(:user_superadmin) { create(:user, :superadmin) }
+  let(:permission) { create(:permission, role_ids: [user.role_id]) }
+  let(:permission_superadmin) { create(:permission, role_ids: [user_superadmin.role_id]) }
+end
+
+RSpec.shared_context "auth" do
+  context "when not logged" do
+    it_behaves_like "unauthenticated"
+  end
+
+  context "when logged" do
+    context "without a role" do
+      before do
+        login_user(create(:user)) # login user
+      end
+
+      it_behaves_like "unauthorized"
+    end
+  end
+end

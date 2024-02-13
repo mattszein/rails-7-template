@@ -4,30 +4,16 @@ require "rails_helper"
 require Rails.root.join("spec", "controllers", "shared", "responds.rb")
 
 describe Adminit::PermissionsController, type: :controller do
-  render_views
-
+  include_context "user and permissions adminit"
   describe "GET #index" do
     subject { get :index, params: {} }
 
-    context "when not logged" do
-      it_behaves_like "unauthenticated"
-    end
-
+    include_context "auth"
     context "when logged" do
-      context "without a role" do
-        before do
-          login_user(create(:user)) # login user
-        end
-
-        it_behaves_like "unauthorized"
-      end
-
       context "with a role" do
-        let!(:user) { create(:user, :role) }
-        let!(:permission) { create(:permission, role_ids: [user.role_id]) }
-
         before do
           login_user(user) # login user
+          permission
         end
 
         it "is authorized" do
@@ -39,27 +25,13 @@ describe Adminit::PermissionsController, type: :controller do
   end
 
   describe "PUT #update" do
-    # Using `let` and `let!` for setup
-    let!(:user) { create(:user, :role) }
     let(:role) { Role.create(name: "Role") }
-    let(:permission) { create(:permission, role_ids: [user.role_id]) }
     let(:params_update) { {id: permission.id, permission: {role_ids: [user.role_id, role.id]}} }
 
     subject { put :update, params: params_update }
 
-    context "when not logged" do
-      it_behaves_like "unauthenticated"
-    end
-
+    include_context "auth"
     context "when logged" do
-      context "without a role" do
-        before do
-          login_user(create(:user)) # login user
-        end
-
-        it_behaves_like "unauthorized"
-      end
-
       context "with a role" do
         before do
           login_user(user) # login user
