@@ -1,0 +1,10 @@
+<%= render(Core::ModalComponent.new(title: "Add user to #{@role.name}")) do %>
+<%= form_with(scope: :role, url: user_adminit_role_path(@role)) do |form| %>
+  <%= form.labeled :email do %>
+    <%= form.text_field :email, {required: true, placeholder: " "} %>
+  <% end %>
+  <div class="mt-2">
+  <%= form.button "Create", {fullw: true} %>
+  </div>
+<% end %>
+<% end %>

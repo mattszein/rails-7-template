@@ -13,6 +13,9 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 require "rspec/rails"
+require "action_policy/rspec"
+
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -44,6 +47,8 @@ RSpec.configure do |config|
     end
   end
   config.include FactoryBot::Syntax::Methods
+
+  config.include LoginHelpers::Controller, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|
