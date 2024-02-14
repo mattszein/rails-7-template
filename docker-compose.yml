@@ -23,6 +23,7 @@ services:
       REDIS_URL: redis://redis:6379/1
       MALLOC_ARENA_MAX: 2
       WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+      TURBO_RAILS_KEY: turbo_rails_key
       # ----
       # Dev tools
       # ----
@@ -77,7 +78,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-  
+      ws:
+        condition: service_started
   redis:
     image: redis:7.2.1-alpine3.18
     volumes:
@@ -89,6 +91,23 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+
+  ws:
+    image: anycable/anycable-go:1.4
+    ports:
+      - '8080:8080'
+    environment:
+      ANYCABLE_HOST: "0.0.0.0"
+      ANYCABLE_PORT: 8080
+      ANYCABLE_REDIS_URL: redis://redis:6379/0
+      ANYCABLE_RPC_HOST: anycable:50051
+      ANYCABLE_DEBUG: 1
+      ANYCABLE_TURBO_RAILS_KEY: turbo_rails_key
+      ANYCABLE_JWT_ID_KEY: anycable_jwt_key
+      ANYCABLE_BROADCAST_ADAPTER: "http"
+    depends_on:
+      redis:
+        condition: service_healthy
 
   maildev:
     image: maildev/maildev
@@ -126,6 +145,7 @@ services:
       # Set connection timeout for debugging
       # https://docs.browserless.io/docs/docker.html#connection-timeout
       CONNECTION_TIMEOUT: 600000
+
 volumes:
   rails-app-postgres-db:
   rails-app-redis:
