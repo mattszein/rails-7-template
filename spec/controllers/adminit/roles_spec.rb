@@ -26,7 +26,7 @@ describe Adminit::RolesController, type: :controller do
   end
 
   describe "GET #user_select" do
-    subject { get :user_select, params: {} }
+    subject { get :user_select, params: {id: user.role.id} }
 
     include_context "auth"
 
