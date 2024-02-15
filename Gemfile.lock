@@ -432,6 +432,7 @@ DEPENDENCIES
   action_policy
   anycable-rails (~> 1.4)
   anycable-rails-jwt (~> 0.2.0)
+  anyway_config (~> 2.0)
   bootsnap
   capybara
   cuprite
