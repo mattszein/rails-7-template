@@ -1,3 +1,7 @@
+<div class="flex flex-col gap-4">
+  <%= render Core::CardComponent.new({padding: :xs}) do %>
+  <h1 class="text-xl font-semibold">Permissions</h1>
+<% end %>
 <%= render Core::CardComponent.new({padding: :none}) do %>
   <div class="flex p-4 gap-4">
     <%= render Core::TableComponent.new(rows: @permissions) do |table| %>
@@ -13,3 +17,4 @@
     <% end %>
   </div>
 <% end %>
+</div>
