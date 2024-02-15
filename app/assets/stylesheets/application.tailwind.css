@@ -31,3 +31,8 @@ input:-webkit-autofill:active{
 :is(.dark .is-filled input:-webkit-autofill) {
     -webkit-box-shadow: inset #1e293b 0em 4em;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
