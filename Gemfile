@@ -38,6 +38,7 @@ gem "propshaft", "~> 0.8.0"
 gem "freezolite" # Freezolite add frozen_string_literals to true to every file in your project
 gem "anycable-rails", "~> 1.4"
 gem "anycable-rails-jwt", "~> 0.2.0"
+gem "anyway_config", "~> 2.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
