@@ -25,6 +25,16 @@ class Core::Form::ButtonComponentPreview < ViewComponent::Preview
   def create
     render(Core::Form::ButtonComponent.new(form_builder, "Button", {theme: :create}, {}))
   end
+
+  # @label Edit
+  def edit
+    render(Core::Form::ButtonComponent.new(form_builder, "Button", {theme: :edit}, {}))
+  end
+
+  # @label Delete
+  def delete
+    render(Core::Form::ButtonComponent.new(form_builder, "Button", {theme: :delete}, {}))
+  end
   # @!endgroup
 
   # @!group Sizes

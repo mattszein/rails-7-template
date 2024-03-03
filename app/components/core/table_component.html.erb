@@ -8,7 +8,7 @@
   </thead>
   <tbody class="text-sm divide-y">
     <% @rows.each do |row| %>
-      <tr>
+      <tr id="<%= dom_id row %>">
       <% @columns.each do |col| %>
         <td class="px-4 py-2"><%= view_context.capture(row, &col.td_block) %></td>
       <% end %>

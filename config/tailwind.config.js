@@ -30,9 +30,9 @@ module.exports = {
         danger: colors.red,
         warning: colors.yellow,
         info: colors.sky,
-        create: colors.green,
-        show: colors.blue,
-        edit: colors.yellow,
+        create: colors.teal,
+        show: colors.sky,
+        edit: colors.lime,
         update: colors.orange,
         delete: colors.red,
         // Options: slate, gray, zinc, neutral, stone

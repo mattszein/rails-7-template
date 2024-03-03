@@ -1,16 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
-import {enter, leave, toggle} from 'el-transition'
+import { enter, leave, toggle } from 'el-transition'
 import Cookies from 'js-cookie'
 
 export default class extends Controller {
-  static targets = [ "alert", "sidebar", "modal" ]
+  static targets = ["alert", "sidebar", "modal"]
 
   close() {
     let element = this.element
     leave(element).then(() => {
-        element.remove();
+      element.remove();
     });
- }
+  }
+
+  enter() {
+    enter(this.element);
+  }
 
   toggleIt() {
     toggle(this.element);

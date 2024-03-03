@@ -19,5 +19,11 @@ module Adminit
     def authorize_adminit_access
       redirect_to "/", flash: {alert: "You are not worthy!"} unless current_user&.adminit_access?
     end
+
+    private
+
+    def ensure_frame_response
+      redirect_to root_path unless turbo_frame_request?
+    end
   end
 end

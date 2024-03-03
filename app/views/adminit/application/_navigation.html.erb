@@ -17,5 +17,8 @@
       <% if allowed_to? :manage?, with: Adminit::PermissionPolicy %> 
         <%= link_to "Permissions", adminit_permissions_path, class: "block p-2 rounded hover:bg-gray-100" %> 
       <% end %>
+      <% if allowed_to? :manage?, with: Adminit::TicketPolicy %> 
+        <%= link_to "Tickets", adminit_tickets_path, class: "block p-2 rounded hover:bg-gray-100" %> 
+      <% end %>
   </div>
 </div>
