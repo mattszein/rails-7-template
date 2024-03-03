@@ -1,15 +1,15 @@
-<div class="flex flex-col gap-4">
-  <%= render Core::CardComponent.new({padding: :xs}) do %>
-  <h1 class="text-xl font-semibold">Roles</h1>
-<% end %>
+<div class="w-full">
+  <div class="flex justify-between items-center pb-2">
+    <h1 class="text-xl font-semibold">Roles</h1>
+  </div>
 
-<%= render Core::CardComponent.new({padding: :none}) do %>
-  <div class="flex p-4 gap-4">
-    <%= render Core::TableComponent.new(rows: @roles) do |table| %>
-      <%= table.column("Name") { |role| role.name } %>
-      <%= table.column("Actions") { |role| link_to "Show", adminit_role_path(role) , class: "text-indigo-500 font-bold" } %>
-    <% end %>
+  <%= render Core::CardComponent.new({padding: :none}) do %>
+    <div class="flex p-4 gap-4">
+      <%= render Core::TableComponent.new(rows: @roles) do |table| %>
+        <%= table.column("Name") { |role| role.name } %>
+        <%= table.column("Actions") { |role| link_to "Show", adminit_role_path(role) , class: "text-indigo-500 font-bold" } %>
+      <% end %>
 
-</div>
-<% end %>
+    </div>
+  <% end %>
 </div>

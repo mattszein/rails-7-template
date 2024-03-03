@@ -11,4 +11,5 @@ namespace :adminit do
   end
   resources :dashboard, only: [:index]
   root to: "dashboard#index"
+  resources :tickets
 end

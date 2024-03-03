@@ -32,7 +32,14 @@ input:-webkit-autofill:active{
     -webkit-box-shadow: inset #1e293b 0em 4em;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.5s;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
