@@ -23,6 +23,10 @@ services:
       REDIS_URL: redis://redis:6379/1
       MALLOC_ARENA_MAX: 2
       WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+      ACTION_CABLE_ADAPTER: ${ACTION_CABLE_ADAPTER:-anycable}
+      ANYCABLE_RPC_HOST: 0.0.0.0:50051
+      ANYCABLE_BROADCAST_ADAPTER: http
+      ANYCABLE_HTTP_BROADCAST_URL: http://ws:8090/_broadcast
       TURBO_RAILS_KEY: turbo_rails_key
       # ----
       # Dev tools
@@ -96,6 +100,7 @@ services:
     image: anycable/anycable-go:1.4
     ports:
       - '8080:8080'
+      - '8090:8090'
     environment:
       ANYCABLE_HOST: "0.0.0.0"
       ANYCABLE_PORT: 8080
@@ -105,6 +110,7 @@ services:
       ANYCABLE_TURBO_RAILS_KEY: turbo_rails_key
       ANYCABLE_JWT_ID_KEY: anycable_jwt_key
       ANYCABLE_BROADCAST_ADAPTER: "http"
+      ANYCABLE_REDIS_CHANNEL: __anycable__
     depends_on:
       redis:
         condition: service_healthy
