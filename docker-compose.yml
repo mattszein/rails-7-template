@@ -1,14 +1,13 @@
 version: "3.7"
 services:
-
   x-backend: &backend
     build:
       context: .
       dockerfile: Dockerfile
       target: base
       args:
-        RUBY_VERSION: '3.2.2'
-        PG_MAJOR: '16'
+        RUBY_VERSION: "3.2.2"
+        PG_MAJOR: "16"
     environment: &env
       # ----
       # Application configuration
@@ -46,10 +45,10 @@ services:
     tmpfs:
       - /tmp
       - /app/tmp/pids
-  
+
   db:
-    image: 'postgres:16.0-alpine3.18'
-    volumes: 
+    image: "postgres:16.0-alpine3.18"
+    volumes:
       - rails-app-postgres-db:/var/lib/postgresql/data
     restart: always
     environment:
@@ -60,7 +59,7 @@ services:
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
-  
+
   rails:
     <<: *backend
     command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -73,7 +72,7 @@ services:
       - rails-app-storage:/rails-app/storage
       - rails-app-history:/usr/local/hist
     ports:
-      - 3000:3000
+      - 4000:3000
       - 35729:35729
     depends_on:
       maildev:
@@ -99,8 +98,8 @@ services:
   ws:
     image: anycable/anycable-go:1.4
     ports:
-      - '8080:8080'
-      - '8090:8090'
+      - "8080:8080"
+      - "8090:8090"
     environment:
       ANYCABLE_HOST: "0.0.0.0"
       ANYCABLE_PORT: 8080
@@ -143,7 +142,7 @@ services:
     # See https://github.com/browserless/chrome/issues/1393
     image: browserless/chrome:latest
     ports:
-      - '3333:3333'
+      - "3333:3333"
     volumes:
       - .:/rails-app
     environment:

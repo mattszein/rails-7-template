@@ -1,24 +1,22 @@
-<div class="flex flex-col h-full text-sm" data-controller="dropdown">
-  <div class="flex md:block justify-between items-center">
-    <div class="flex md:block items-center">
-      <h1 class="mr-2 md:p-2 text-xl font-semibold">Adminit</h1>
-      <% if main_app.respond_to?(:root_url) %>
-        <%= link_to main_app.root_url, class: "block p-2 rounded hover:bg-gray-200", data: { turbo: false } do %>
-          ← Back <span class="hidden md:inline">to App</span>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+<nav class="opacity-0 flex invisible group-hover/drawer:visible group-hover/drawer:opacity-100 transition-opacity easy-in-out duration-300 flex-col w-full px-4">
+  <% link_style = "flex gap-2 items-center p-3 hover:cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 rounded-sm w-full group/link" %>
+  <% if allowed_to? :manage?, with: Adminit::RolePolicy %>
+    <%= render(Core::LinkComponent.new(url: adminit_roles_path, options: {class: link_style, custom_style: {style: :no_style}})) do %>
+      <svg class="h-8 text-gray-500 dark:text-gray-400 group-hover/link:text-gray-900 dark:group-hover/link:text-blue-500 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M19.307 3.21a2.91 2.91 0 1 0-.223 1.94a11.636 11.636 0 0 1 8.232 7.049l1.775-.698a13.576 13.576 0 0 0-9.784-8.291m-2.822 1.638a.97.97 0 1 1 0-1.939a.97.97 0 0 1 0 1.94m-4.267.805l-.717-1.774a13.576 13.576 0 0 0-8.291 9.784a2.91 2.91 0 1 0 1.94.223a11.636 11.636 0 0 1 7.068-8.233m-8.34 11.802a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94m12.607 8.727a2.91 2.91 0 0 0-2.599 1.62a11.636 11.636 0 0 1-8.233-7.05l-1.774.717a13.576 13.576 0 0 0 9.813 8.291a2.91 2.91 0 1 0 2.793-3.578m0 3.879a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94M32 16.485a2.91 2.91 0 1 0-4.199 2.599a11.636 11.636 0 0 1-7.05 8.232l.718 1.775a13.576 13.576 0 0 0 8.291-9.813A2.91 2.91 0 0 0 32 16.485m-2.91.97a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94"/><path fill="currentColor" d="M19.19 16.35a3.879 3.879 0 1 0-5.42 0a4.848 4.848 0 0 0-2.134 4.014v1.939h9.697v-1.94a4.848 4.848 0 0 0-2.143-4.014m-4.645-2.774a1.94 1.94 0 1 1 3.88 0a1.94 1.94 0 0 1-3.88 0m-.97 6.788a2.91 2.91 0 1 1 5.819 0z" class="ouiIcon__fillSecondary"/></svg>
 
-  <div class="md:flex flex-col flex-grow">
-      <% if allowed_to? :manage?, with: Adminit::RolePolicy %> 
-        <%= link_to "Roles", adminit_roles_path, class: "block p-2 rounded hover:bg-gray-100" %> 
-      <% end %>
-      <% if allowed_to? :manage?, with: Adminit::PermissionPolicy %> 
-        <%= link_to "Permissions", adminit_permissions_path, class: "block p-2 rounded hover:bg-gray-100" %> 
-      <% end %>
-      <% if allowed_to? :manage?, with: Adminit::TicketPolicy %> 
-        <%= link_to "Tickets", adminit_tickets_path, class: "block p-2 rounded hover:bg-gray-100" %> 
-      <% end %>
-  </div>
-</div>
+      <span class="opacity-100 text-gray-600 ml-2 text-md group-hover/drawer:opacity-100 group-hover/drawer:transition-opacity">Roles</span>
+    <% end %>
+  <% end %>
+  <% if allowed_to? :manage?, with: Adminit::PermissionPolicy %>
+    <%= render(Core::LinkComponent.new(url: adminit_permissions_path, options: {class: link_style, custom_style: {style: :no_style}})) do %>
+      <svg class="h-8 text-gray-500 dark:text-gray-400 group-hover/link:text-gray-900 dark:group-hover/link:text-blue-500 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"><path stroke-linejoin="round" d="M20 10H6a2 2 0 0 0-2 2v26a2 2 0 0 0 2 2h36a2 2 0 0 0 2-2v-2.5"/><path d="M10 23h8m-8 8h24"/><circle cx="34" cy="16" r="6" stroke-linejoin="round"/><path stroke-linejoin="round" d="M44 28.419C42.047 24.602 38 22 34 22s-5.993 1.133-8.05 3"/></g></svg>
+      <span class="text-gray-600 ml-2 text-md">Permissions</span>
+    <% end %>
+  <% end %>
+  <% if allowed_to? :manage?, with: Adminit::TicketPolicy %>
+    <%= render(Core::LinkComponent.new(url: adminit_tickets_path, options: {class: link_style, custom_style: {style: :no_style}})) do %>
+    <svg class="h-8 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12v4.143C2 17.167 2.897 18 4 18h1a1 1 0 0 0 1-1v-5.143a1 1 0 0 0-1-1h-.908C4.648 6.987 7.978 4 12 4s7.352 2.987 7.908 6.857H19a1 1 0 0 0-1 1V18c0 1.103-.897 2-2 2h-2v-1h-4v3h6c2.206 0 4-1.794 4-4c1.103 0 2-.833 2-1.857V12c0-5.514-4.486-10-10-10"/></svg>
+      <span class="text-gray-600 ml-2 text-md">Tickets</span>
+    <% end %>
+  <% end %>
+</nav>
